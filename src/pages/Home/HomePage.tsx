@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MaterialInputArea } from "../../components/material/MaterialInputArea";
 import { MaterialList } from "../../components/material/MaterialList";
 import { StorySettingsPanel } from "../../components/material/StorySettingsPanel";
@@ -61,14 +61,33 @@ export function HomePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="max-w-3xl mx-auto px-4 pt-10 pb-4 text-center">
-        <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">
-          INSTA TOON STORY MAKER
-        </h1>
-        <p className="text-gray-500 mt-1">오늘 어떤 이야기를 만들어볼까요?</p>
+      <header className="max-w-3xl mx-auto px-4 pt-6 pb-4">
+        <div className="flex justify-end">
+          <Link
+            to="/projects"
+            className="text-xs text-gray-400 hover:text-violet-600"
+          >
+            내 프로젝트 →
+          </Link>
+        </div>
+        <div className="text-center mt-2">
+          <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">
+            INSTA TOON STORY MAKER
+          </h1>
+          <p className="text-gray-500 mt-1">오늘 어떤 이야기를 만들어볼까요?</p>
+        </div>
       </header>
 
       <main className="max-w-3xl mx-auto px-4 pb-16 flex flex-col gap-6">
+        <input
+          value={project.title}
+          onChange={(e) =>
+            updateProject((prev) => ({ ...prev, title: e.target.value }))
+          }
+          placeholder="프로젝트 제목"
+          className="w-full text-sm text-gray-500 bg-transparent border-b border-transparent hover:border-gray-200 focus:border-violet-400 focus:outline-none px-1 py-1"
+        />
+
         <Card>
           <MaterialInputArea onAdd={handleAddText} />
         </Card>

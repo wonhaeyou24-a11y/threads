@@ -1,12 +1,12 @@
 import type { StoryCandidate } from "../src/types/story";
 import type { StoryboardPanel } from "../src/types/storyboard";
-import { rewritePanelResponseSchema } from "./_lib/schemas";
-import { generateJSON, GeminiCallError, delay } from "./_lib/geminiClient";
-import { checkRateLimit, getClientKey } from "./_lib/rateLimit";
+import { rewritePanelResponseSchema } from "./_lib/schemas.js";
+import { generateJSON, GeminiCallError, delay } from "./_lib/geminiClient.js";
+import { checkRateLimit, getClientKey } from "./_lib/rateLimit.js";
 import {
   buildPanelRewritePrompt,
   buildPanelRewriteSystemPrompt,
-} from "./_lib/prompts";
+} from "./_lib/prompts.js";
 import type { ApiHandler } from "./_lib/httpTypes";
 
 const MAX_REQUEST_LENGTH = 500;

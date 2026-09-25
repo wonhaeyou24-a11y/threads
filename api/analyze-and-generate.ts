@@ -1,14 +1,14 @@
 import type { StoryMaterial } from "../src/types/material";
 import type { StorySettings } from "../src/types/story";
-import { generateId } from "./_lib/id";
-import { MATERIAL_LIMITS } from "./_lib/limits";
-import { analyzeAndGenerateResponseSchema } from "./_lib/schemas";
-import { generateJSON, GeminiCallError, delay } from "./_lib/geminiClient";
-import { checkRateLimit, getClientKey } from "./_lib/rateLimit";
+import { generateId } from "./_lib/id.js";
+import { MATERIAL_LIMITS } from "./_lib/limits.js";
+import { analyzeAndGenerateResponseSchema } from "./_lib/schemas.js";
+import { generateJSON, GeminiCallError, delay } from "./_lib/geminiClient.js";
+import { checkRateLimit, getClientKey } from "./_lib/rateLimit.js";
 import {
   buildAnalyzeAndGeneratePrompt,
   buildAnalyzeAndGenerateSystemPrompt,
-} from "./_lib/prompts";
+} from "./_lib/prompts.js";
 import type { ApiHandler } from "./_lib/httpTypes";
 
 interface RequestBody {

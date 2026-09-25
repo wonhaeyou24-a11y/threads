@@ -1,9 +1,9 @@
 import type { StoryCandidate } from "../src/types/story";
-import { generateId } from "./_lib/id";
-import { generateStoryboardResponseSchema } from "./_lib/schemas";
-import { generateJSON, GeminiCallError, delay } from "./_lib/geminiClient";
-import { checkRateLimit, getClientKey } from "./_lib/rateLimit";
-import { buildStoryboardPrompt, buildStoryboardSystemPrompt } from "./_lib/prompts";
+import { generateId } from "./_lib/id.js";
+import { generateStoryboardResponseSchema } from "./_lib/schemas.js";
+import { generateJSON, GeminiCallError, delay } from "./_lib/geminiClient.js";
+import { checkRateLimit, getClientKey } from "./_lib/rateLimit.js";
+import { buildStoryboardPrompt, buildStoryboardSystemPrompt } from "./_lib/prompts.js";
 import type { ApiHandler } from "./_lib/httpTypes";
 
 interface RequestBody {

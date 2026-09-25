@@ -3,7 +3,7 @@ import { MATERIAL_LIMITS } from "../src/types/material";
 import type { StoryMaterial } from "../src/types/material";
 import type { StorySettings } from "../src/types/story";
 import { analyzeAndGenerateResponseSchema } from "../src/services/ai/schemas";
-import { generateJSON, GeminiCallError } from "./_lib/geminiClient";
+import { generateJSON, GeminiCallError, delay } from "./_lib/geminiClient";
 import { checkRateLimit, getClientKey } from "./_lib/rateLimit";
 import {
   buildAnalyzeAndGeneratePrompt,
@@ -49,7 +49,8 @@ async function callGeminiWithRetry(
   try {
     return await attempt();
   } catch {
-    // 1회 자동 재시도 (다른 프롬프트 문구로)
+    // 1회 자동 재시도 (다른 프롬프트 문구로). 일시적 과부하(503) 등을 고려해 짧게 대기 후 재시도한다.
+    await delay(1500);
     return await attempt(
       "이전 응답이 형식에 맞지 않았다. 반드시 지정된 JSON 스키마의 키와 타입을 정확히 지켜서 다시 응답하라."
     );

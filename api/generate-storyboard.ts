@@ -1,7 +1,7 @@
 import { generateId } from "../src/lib/id";
 import type { StoryCandidate } from "../src/types/story";
 import { generateStoryboardResponseSchema } from "../src/services/ai/schemas";
-import { generateJSON, GeminiCallError } from "./_lib/geminiClient";
+import { generateJSON, GeminiCallError, delay } from "./_lib/geminiClient";
 import { checkRateLimit, getClientKey } from "./_lib/rateLimit";
 import { buildStoryboardPrompt, buildStoryboardSystemPrompt } from "./_lib/prompts";
 import type { ApiHandler } from "./_lib/httpTypes";
@@ -36,6 +36,7 @@ async function callGeminiWithRetry(candidate: StoryCandidate, panelCount: number
   try {
     return await attempt();
   } catch {
+    await delay(1500);
     return await attempt(
       `이전 응답이 형식에 맞지 않았다. 반드시 정확히 ${panelCount}개의 panels를 지정된 JSON 스키마로 응답하라.`
     );

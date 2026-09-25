@@ -5,13 +5,13 @@ import { MaterialList } from "../../components/material/MaterialList";
 import { StorySettingsPanel } from "../../components/material/StorySettingsPanel";
 import { Button } from "../../components/common/Button";
 import { Card } from "../../components/common/Card";
-import { useProject } from "../../hooks/useProject";
+import { useProjectContext } from "../../contexts/ProjectContext";
 import { parseMaterialsFromText } from "../../utils/materialParser";
 import { validateMaterials } from "../../utils/materialLimits";
 import { MATERIAL_LIMITS } from "../../types/material";
 
 export function HomePage() {
-  const { project, updateProject } = useProject();
+  const { project, updateProject } = useProjectContext();
   const navigate = useNavigate();
   const [notice, setNotice] = useState<string | null>(null);
 

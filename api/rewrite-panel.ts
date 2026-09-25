@@ -1,6 +1,6 @@
 import type { StoryCandidate } from "../src/types/story";
 import type { StoryboardPanel } from "../src/types/storyboard";
-import { rewritePanelResponseSchema } from "../src/services/ai/schemas";
+import { rewritePanelResponseSchema } from "./_lib/schemas";
 import { generateJSON, GeminiCallError, delay } from "./_lib/geminiClient";
 import { checkRateLimit, getClientKey } from "./_lib/rateLimit";
 import {

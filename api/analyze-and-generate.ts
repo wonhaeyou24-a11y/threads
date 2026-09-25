@@ -1,8 +1,8 @@
-import { generateId } from "../src/lib/id";
-import { MATERIAL_LIMITS } from "../src/types/material";
 import type { StoryMaterial } from "../src/types/material";
 import type { StorySettings } from "../src/types/story";
-import { analyzeAndGenerateResponseSchema } from "../src/services/ai/schemas";
+import { generateId } from "./_lib/id";
+import { MATERIAL_LIMITS } from "./_lib/limits";
+import { analyzeAndGenerateResponseSchema } from "./_lib/schemas";
 import { generateJSON, GeminiCallError, delay } from "./_lib/geminiClient";
 import { checkRateLimit, getClientKey } from "./_lib/rateLimit";
 import {

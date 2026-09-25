@@ -1,6 +1,6 @@
-import { generateId } from "../src/lib/id";
 import type { StoryCandidate } from "../src/types/story";
-import { generateStoryboardResponseSchema } from "../src/services/ai/schemas";
+import { generateId } from "./_lib/id";
+import { generateStoryboardResponseSchema } from "./_lib/schemas";
 import { generateJSON, GeminiCallError, delay } from "./_lib/geminiClient";
 import { checkRateLimit, getClientKey } from "./_lib/rateLimit";
 import { buildStoryboardPrompt, buildStoryboardSystemPrompt } from "./_lib/prompts";

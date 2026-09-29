@@ -1,4 +1,4 @@
-const DEFAULT_MODEL = "gemini-3.5-flash";
+const DEFAULT_MODEL = "gemini-3.1-flash-lite";
 
 export class GeminiCallError extends Error {}
 

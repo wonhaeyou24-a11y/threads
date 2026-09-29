@@ -69,12 +69,7 @@ export function StoryWorkspacePage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <ProgressSteps
           title="소재를 분석하고 스토리 후보를 만들고 있습니다..."
-          steps={[
-            { label: "등장인물/사건/감정 분석", done: false },
-            { label: "이야기 A", done: false },
-            { label: "이야기 B", done: false },
-            { label: "이야기 C", done: false },
-          ]}
+          steps={["등장인물/사건/감정 분석", "이야기 A", "이야기 B", "이야기 C"]}
         />
       </div>
     );

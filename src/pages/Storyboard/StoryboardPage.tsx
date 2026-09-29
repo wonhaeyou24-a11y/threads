@@ -235,13 +235,7 @@ export function StoryboardPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <ProgressSteps
           title="웹툰 콘티를 구성하고 있습니다..."
-          steps={[
-            { label: "이야기 구조", done: false },
-            { label: "컷 구성", done: false },
-            { label: "대사", done: false },
-            { label: "장면 설명", done: false },
-            { label: "마지막 장면", done: false },
-          ]}
+          steps={["이야기 구조", "컷 구성", "대사", "장면 설명", "마지막 장면"]}
         />
       </div>
     );

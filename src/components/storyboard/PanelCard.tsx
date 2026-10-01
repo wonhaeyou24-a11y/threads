@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState, useCallback } from "react";
 import type { StoryboardPanel } from "../../types/storyboard";
 import { Card } from "../common/Card";
 import { Button } from "../common/Button";
@@ -14,6 +14,49 @@ interface PanelCardProps {
   errorMessage?: string | null;
 }
 
+/** 내용 길이에 맞춰 자동으로 높이가 늘어나는 textarea. 텍스트가 잘리거나 스크롤에 숨지 않게 한다. */
+function AutoGrowTextarea({
+  value,
+  onChange,
+  className,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  className: string;
+}) {
+  const ref = useRef<HTMLTextAreaElement>(null);
+
+  const resize = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+  }, []);
+
+  useLayoutEffect(() => {
+    resize();
+  }, [value, resize]);
+
+  // 너비가 바뀌어 줄바꿈이 달라질 때(반응형 레이아웃 전환 등)도 높이를 다시 계산한다.
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(() => resize());
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [resize]);
+
+  return (
+    <textarea
+      ref={ref}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      rows={1}
+      className={`${className} resize-none overflow-hidden`}
+    />
+  );
+}
+
 function Field({
   label,
   value,
@@ -26,17 +69,12 @@ function Field({
   multiline?: boolean;
 }) {
   const className =
-    "w-full text-sm rounded-lg border border-gray-200 px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-violet-400";
+    "w-full text-sm leading-relaxed rounded-lg border border-gray-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400 min-h-[2.5rem]";
   return (
     <div>
       <p className="text-xs text-gray-400 mb-1">{label}</p>
       {multiline ? (
-        <textarea
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          rows={2}
-          className={`${className} resize-none`}
-        />
+        <AutoGrowTextarea value={value} onChange={onChange} className={className} />
       ) : (
         <input
           value={value}
@@ -67,7 +105,7 @@ export function PanelCard({
   };
 
   return (
-    <Card className="flex flex-col gap-3">
+    <Card className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <span className="text-sm font-semibold text-gray-500">
           {String(panel.panelNumber).padStart(2, "0")}
@@ -117,6 +155,7 @@ export function PanelCard({
         label="나레이션"
         value={panel.narration ?? ""}
         onChange={(v) => onChange({ ...panel, narration: v })}
+        multiline
       />
 
       <div className="border-t border-gray-100 pt-3 flex flex-col gap-2">
